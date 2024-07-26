@@ -1,7 +1,10 @@
 package org.example;
 
+import Bordergame.Position;
+
 public class Program {
     public static void main(String[] args) {
-        System.out.println("Helo World");
+        Position pos = new Position(3, 5);
+        System.out.println(pos);
     }
 }
