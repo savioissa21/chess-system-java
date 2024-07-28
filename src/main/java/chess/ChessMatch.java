@@ -31,33 +31,43 @@ public class ChessMatch {
         }
         return mat;
     }
+
+    public boolean [][] possibleMoves(ChessPosition sourcePosition) {
+        Position position = sourcePosition.toPosition();
+        validateSourcePosition(position);
+        return  board.piece(position).possibleMove();
+    }
+
     public ChessPiece perfomChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
         validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
-        return  (ChessPiece) capturedPiece;
+        return (ChessPiece) capturedPiece;
     }
+
     private Piece makeMove(Position source, Position target) {
         Piece p = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
         return capturedPiece;
     }
+
     private void validateSourcePosition(Position position) {
-        if (!board.thereIsPiece(position)){
+        if (!board.thereIsPiece(position)) {
             throw new ChessException("Não existe peça nessa posição ");
         }
-        if (!board.piece(position).isthereAnyPossibleMove()){
+        if (!board.piece(position).isthereAnyPossibleMove()) {
             throw new ChessException("Não existe movimentos para peça escolhida: ");
         }
     }
-private void validateTargetPosition(Position source, Position target) {
-        if(!board.piece(source).possibleMove(target)){
+
+    private void validateTargetPosition(Position source, Position target) {
+        if (!board.piece(source).possibleMove(target)) {
             throw new ChessException("A peça escolhida não pode se mover para a posição de destino");
         }
-}
+    }
 
     private void placeNewPiece(char column, int row, ChessPiece piece) {
         System.out.println("Placing " + piece + " at " + column + row);  // Mensagem de debug
