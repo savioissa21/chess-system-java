@@ -1,6 +1,7 @@
 package application;
 
 import Bordergame.BoardException;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 
@@ -19,6 +20,13 @@ public class UI {
         }
     }
 
+    public static void printMatch(ChessMatch chessMatch) {
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("turn : " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+    }
+
     public static void printBoard(ChessPiece[][] pieces) {
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
@@ -29,7 +37,8 @@ public class UI {
         }
         System.out.print("  a b c d e f g h");
     }
-    public static void printBoard(ChessPiece[][] pieces, boolean [][] possibleMoves) {
+
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieces.length; j++) {
@@ -39,7 +48,6 @@ public class UI {
         }
         System.out.print("  a b c d e f g h");
     }
-
 
     // ANSI escape codes for colors
     public static final String ANSI_RESET = "\u001B[0m";
@@ -52,7 +60,7 @@ public class UI {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static void clearScreen(){
+    public static void clearScreen() {
         System.out.println("\033[H\033[2J");
         System.out.flush();
     }
